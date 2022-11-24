@@ -1,85 +1,47 @@
-const {
-  InteractionResponseType,
-  InteractionType,
-  verifyKey,
-} = require("discord-interactions");
+const { InteractionResponseType, InteractionType, verifyKey } = require("discord-interactions");
 const getRawBody = require("raw-body");
 
-const INVITE_COMMAND = {
-  name: "invite",
-  description: "Get an invite link to add the bot to your server",
-};
-
-const SLAP_COMMAND = {
-  name: "slap",
-  description: "Sometimes you gotta slap a person with a large trout",
-  options: [
-    {
-      name: "user",
-      description: "The user to slap",
-      type: 6,
-      required: true,
-    },
-  ],
-};
+const { INVITE_COMMAND, SLAP_COMMAND, COMMANDS } = require('./commands.js')
 
 const INVITE_URL = `https://discord.com/oauth2/authorize?client_id=${process.env.APPLICATION_ID}&scope=applications.commands`;
 
-/**
- * Gotta see someone 'bout a trout
- * @param {VercelRequest} request
- * @param {VercelResponse} response
- */
+
 module.exports = async (request, response) => {
-  // Only respond to POST requests
   if (request.method === "POST") {
-    // Verify the request
     const signature = request.headers["x-signature-ed25519"];
     const timestamp = request.headers["x-signature-timestamp"];
     const rawBody = await getRawBody(request);
 
-    const isValidRequest = verifyKey(
-      rawBody,
-      signature,
-      timestamp,
-      process.env.PUBLIC_KEY
-    );
+    const isValidRequest = verifyKey(rawBody, signature, timestamp, process.env.PUBLIC_KEY);
 
     if (!isValidRequest) {
       console.error("Invalid Request");
       return response.status(401).send({ error: "Bad request signature " });
     }
 
-    // Handle the request
     const message = request.body;
 
-    // Handle PINGs from Discord
     if (message.type === InteractionType.PING) {
       console.log("Handling Ping request");
-      response.send({
-        type: InteractionResponseType.PONG,
-      });
-    } else if (message.type === InteractionType.APPLICATION_COMMAND) {
-      // Handle our Slash Commands
-      switch (message.data.name.toLowerCase()) {
-        case SLAP_COMMAND.name.toLowerCase():
+      response.send({ type: InteractionResponseType.PONG });
+    }
+    else if (message.type === InteractionType.APPLICATION_COMMAND) {
+
+      switch (message.data.name) {
+        case SLAP_COMMAND.name:
           response.status(200).send({
             type: 4,
-            data: {
-              content: "Hello!",
-            },
+            data: { content: "Hello!" }
           });
-          console.log("Slap Request");
           break;
-        case INVITE_COMMAND.name.toLowerCase():
+        case INVITE_COMMAND.name:
           response.status(200).send({
             type: 4,
-            data: {
-              content: INVITE_URL,
-              flags: 64,
-            },
+            data: { content: INVITE_URL, flags: 64 }
           });
-          console.log("Invite request");
+          break;
+        case COMMANDS.name:
+          
           break;
         default:
           console.error("Unknown Command");
