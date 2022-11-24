@@ -1,0 +1,25 @@
+{
+  "name": "discord-interaction",
+  "version": "1.0.0",
+  "description": "discord interactions",
+  "main": "main.js",
+  "scripts": {
+    "start": "node -r dotenv/config register.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kinji2532/discord-interaction.git"
+  },
+  "author": "kinji2532",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kinji2532/discord-interaction/issues"
+  },
+  "homepage": "https://github.com/kinji2532/discord-interaction#readme",
+  "dependencies": {
+    "discord-interactions": "^3.2.0",
+    "node-fetch": "^2.6.6",
+    "raw-body": "^2.5.1",
+    "dotenv": "^16.0.3"
+  }
+}
