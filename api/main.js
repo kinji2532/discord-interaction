@@ -6,13 +6,21 @@ const {
 const getRawBody = require("raw-body");
 
 const INVITE_COMMAND = {
-  name: "Invite",
+  name: "invite",
   description: "Get an invite link to add the bot to your server",
 };
 
-const HI_COMMAND = {
-  name: "Hi",
-  description: "Say hello!",
+const SLAP_COMMAND = {
+  name: "slap",
+  description: "Sometimes you gotta slap a person with a large trout",
+  options: [
+    {
+      name: "user",
+      description: "The user to slap",
+      type: 6,
+      required: true,
+    },
+  ],
 };
 
 const INVITE_URL = `https://discord.com/oauth2/authorize?client_id=${process.env.APPLICATION_ID}&scope=applications.commands`;
