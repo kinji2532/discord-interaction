@@ -23,6 +23,11 @@ exports.commands = [
       }
     ]
   }, (message, response) => {
+    response.status(200).send({
+      type: 4,
+      data: { content: "OK!" }
+    });
+
     console.log(message, response);
   }
 ];

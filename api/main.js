@@ -30,10 +30,6 @@ module.exports = async (request, response) => {
 
           // response.status(200).send({
           //   type: 4,
-          //   data: { content: "Hello!" }
-          // });
-          // response.status(200).send({
-          //   type: 4,
           //   data: { content: INVITE_URL, flags: 64 }
           // });
     } else {
