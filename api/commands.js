@@ -42,10 +42,10 @@ exports.commands = [
           }
         ).then(async res => {
           const result = JSON.parse(await res.text());
-          console.log(result);
+
           return response.status(200).send({
           type: 4,
-          data: { content: /* result.map(d => `${d.name}: ${d.id}`).join('\n') */'ok' }
+          data: { content: result.map(d => `${d.name}: ${d.id}`).join('\n') }
         });
       });
     }
