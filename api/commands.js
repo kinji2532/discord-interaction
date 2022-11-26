@@ -1,3 +1,4 @@
+const fetch = require("node-fetch");
 
 exports.commands = [
   {
@@ -23,10 +24,30 @@ exports.commands = [
       }
     ]
   }, (message, response) => {
-    response.status(200).send({
-      type: 4,
-      data: { content: Object.keys(exports).join('\n') }
-    });
-    console.log(JSON.stringify(message.data));
+    const subCommand = message.data.options[0];
+
+    switch(subCommand.name) {
+      case 'add':
+        break;
+      case 'delete':
+        break;
+      case 'list':
+        fetch(`https://discord.com/api/v10/applications/${process.env.APPLICATION_ID}/guilds/${guildId}/commands`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": `Bot ${process.env.TOKEN}`,
+            },
+            method: "GET"
+          }
+        ).then(async res => {
+          const result = JSON.parse(await res.text());
+          return response.status(200).send({
+          type: 4,
+          data: { content: result.map(d => `${d.name}: ${d.id}`).join('\n') }
+        });
+      });
+    }
+    console.log(JSON.stringify(message.data, null, 2));
   }
 ];
