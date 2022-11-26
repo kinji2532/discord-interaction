@@ -25,10 +25,8 @@ exports.commands = [
   }, (message, response) => {
     response.status(200).send({
       type: 4,
-      data: { content: "OK!" }
+      data: { content: Object.keys(exports).join('\n') }
     });
-
-    console.log(message, response);
+    console.log(message.data);
   }
 ];
-exports.list = Object.values(exports).map(d=>d[0]);

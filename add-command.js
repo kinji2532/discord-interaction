@@ -9,7 +9,7 @@ fetch(`https://discord.com/api/v10/applications/${process.env.APPLICATION_ID}/gu
       "Authorization": `Bot ${process.env.TOKEN}`,
     },
     method: "PUT",
-    body: JSON.stringify(require('./api/commands').list),
+    body: JSON.stringify(Object.values(require('./api/commands')).map(d=>d[0])),
   }
 ).then(async response => {
   if (response.ok) {
