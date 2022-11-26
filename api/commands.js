@@ -27,6 +27,6 @@ exports.commands = [
       type: 4,
       data: { content: Object.keys(exports).join('\n') }
     });
-    console.log(message.data);
+    console.log(JSON.stringify(message.data));
   }
 ];
