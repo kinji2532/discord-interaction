@@ -1,8 +1,6 @@
 const fetch = require("node-fetch");
 
-const guildId = "506072711815233536";
-
-fetch(`https://discord.com/api/v10/applications/${process.env.APPLICATION_ID}/guilds/${guildId}/commands`,
+fetch(`https://discord.com/api/v10/applications/${process.env.APPLICATION_ID}/guilds/${process.env.GUILD_ID}/commands`,
   {
     headers: {
       "Content-Type": "application/json",
