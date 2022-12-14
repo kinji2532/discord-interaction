@@ -4,8 +4,8 @@
   "description": "discord interactions",
   "main": "main.js",
   "scripts": {
-    "start": "node -r dotenv/config main.js",
-    "test": "node -r dotenv/config add-command.js"
+    "start": "node main.js",
+    "test": "node add-command.js"
   },
   "repository": {
     "type": "git",

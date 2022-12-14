@@ -1,5 +1,6 @@
 const { InteractionResponseType, InteractionType, verifyKey } = require("discord-interactions");
 const getRawBody = require("raw-body");
+require('dotenv').config();
 
 const commandList = require('./commands.js');
 
