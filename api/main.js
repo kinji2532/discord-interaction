@@ -20,11 +20,17 @@ module.exports = async (request, response) => {
       response.send({ type: InteractionResponseType.PONG });
     }
     else if (message.type === InteractionType.APPLICATION_COMMAND) {
+      console.log(message);
+
       const commandFunc = cmdManager.list[message.data.name]?.[1];
 
       if(!commandFunc) return response.status(200).send({ content: "Unknown Command" });
 
-      commandFunc(message, response);
+      try {
+        return commandFunc(message, response);
+      } catch(e) {
+        return response.status(200).send({ content: e.message });
+      }
     } else {
       response.status(400).send({ error: "Unknown Type" });
     }
