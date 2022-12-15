@@ -4,6 +4,8 @@ const cmdManager = require('./utils');
 
 require('dotenv').config();
 
+cmdManager.load();
+
 module.exports = async (request, response) => {
   if (request.method === "POST") {
     const signature = request.headers["x-signature-ed25519"];
