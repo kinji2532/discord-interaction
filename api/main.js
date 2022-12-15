@@ -28,11 +28,6 @@ module.exports = async (request, response) => {
       if(!commandFunc) return response.status(400).send({ error: "Unknown Command" });
 
       commandFunc(message, response);
-
-          // response.status(200).send({
-          //   type: 4,
-          //   data: { content: INVITE_URL, flags: 64 }
-          // });
     } else {
       response.status(400).send({ error: "Unknown Type" });
     }
