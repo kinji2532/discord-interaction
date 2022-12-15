@@ -1,8 +1,15 @@
 const { InteractionResponseType, InteractionType, verifyKey } = require("discord-interactions");
 const getRawBody = require("raw-body");
+const cmdManager = require('./utils');
+const { inspect } = require('util');
+
 require('dotenv').config();
 
-const commandList = require('./commands.js');
+let commandList;
+
+cmdManager.load().then(list=>{
+  commandList = list;
+});
 
 module.exports = async (request, response) => {
   if (request.method === "POST") {
@@ -20,12 +27,9 @@ module.exports = async (request, response) => {
       response.send({ type: InteractionResponseType.PONG });
     }
     else if (message.type === InteractionType.APPLICATION_COMMAND) {
-
-      console.log(message);
-      
       const commandFunc = commandList[message.data.name]?.[1];
 
-      if(!commandFunc) return response.status(400).send({ error: "Unknown Command" });
+      if(!commandFunc) return response.status(200).send({ content: "Unknown Command" });
 
       commandFunc(message, response);
     } else {
