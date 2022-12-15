@@ -68,5 +68,7 @@ exports.load = async () => {
   const message = JSON.parse(await data.text())[0];
   const result = await fetch(message.attachments[0].url, {method:'GET'});
   
-  return eval(await result.text())[0];
+  this.list = eval(await result.text())[0];
 };
+
+exports.list = [];
