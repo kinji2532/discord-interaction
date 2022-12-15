@@ -1,7 +1,7 @@
 const cmdManager = require('./utils');
 const { inspect } = require('util');
 
-exports.commands = [
+exports.cmd_manager = [
   {
     name: 'cmd_manager',
     description: 'slash command manager',
@@ -71,7 +71,7 @@ exports.eval = [
 
     try {
       const result = eval(subCmd.value);
-      
+
       return response.status(200).send({
         type: 4,
         data: { content: inspect(result).slice(0,2000) }
