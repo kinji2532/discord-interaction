@@ -1,4 +1,4 @@
-const cmdManager = require('./api/utils');
+const cmdManager = require('./utils');
 
 const { inspect } = require('util');
 
