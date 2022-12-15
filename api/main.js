@@ -4,7 +4,6 @@ const cmdManager = require('./utils');
 
 require('dotenv').config();
 
-cmdManager.load();
 
 module.exports = async (request, response) => {
   if (request.method === "POST") {
@@ -22,9 +21,10 @@ module.exports = async (request, response) => {
       response.send({ type: InteractionResponseType.PONG });
     }
     else if (message.type === InteractionType.APPLICATION_COMMAND) {
+      const cmdList = await cmdManager.load();
       console.log(message);
 
-      const commandFunc = cmdManager.list[message.data.name]?.[1];
+      const commandFunc = cmdList[message.data.name]?.[1];
 
       if(!commandFunc) return response.status(200).send({ content: "Unknown Command" });
 
