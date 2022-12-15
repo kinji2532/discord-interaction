@@ -64,11 +64,12 @@ exports.load = async () => {
       "Authorization": `Bot ${process.env.TOKEN}`
     },
     method: "GET"
-  })
+  });
   const message = JSON.parse(await data.text())[0];
   const result = await fetch(message.attachments[0].url, {method:'GET'});
   
   this.list = eval(await result.text())[0];
+  console.log(message, this.list);
 };
 
 exports.list = [];
