@@ -1,5 +1,4 @@
 const cmdManager = require('./utils');
-
 const { inspect } = require('util');
 
 exports.cmd_manager = [
@@ -85,3 +84,9 @@ exports.eval = [
     }
   }
 ];
+
+exports.decument = [
+  {}, async (message, response) => {
+    
+  }
+]
