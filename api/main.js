@@ -33,7 +33,8 @@ module.exports = async (request, response) => {
         return response.status(200).send({ content: e.message });
       }
     } else {
-      response.status(400).send({ error: "Unknown Type" });
+      console.log(message);
+      response.status(200).send({ content: "Unknown Type" });
     }
   }
 };
