@@ -114,10 +114,6 @@ exports.modal = [
         ]
       }
     });
-    response.status(200).send({
-      type: 4,
-      data: { content: 'OK' }
-    });
   }
 ];
 
