@@ -21,7 +21,7 @@ module.exports = async (request, response) => {
       response.send({ type: InteractionResponseType.PONG });
     }
     else if (message.type === InteractionType.APPLICATION_COMMAND) {
-      console.log(message);
+      console.log('APPLICATION_COMMAND', message);
 
       const commandFunc = cmdList[message.data.name]?.[1];
 
@@ -32,8 +32,16 @@ module.exports = async (request, response) => {
       } catch(e) {
         return response.status(200).send({ content: e.message });
       }
-    } else {
-      console.log(message);
+    } 
+    else if(message.type === InteractionType.APPLICATION_MODAL_SUBMIT) {
+      console.log('APPLICATION_MODAL_SUBMIT', message);
+      return response.status(200).send({
+        type: 4,
+        data: { content: 'OK' }
+      });
+    }
+    else {
+      console.log('?', message);
       response.status(200).send({ content: "Unknown Type" });
     }
   }
