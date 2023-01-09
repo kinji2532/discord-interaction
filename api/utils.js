@@ -2,6 +2,7 @@ const fetch = require("node-fetch");
 const FormData = require('form-data');
 
 const { inspect } = require('util');
+const exp = require("constants");
 
 require('dotenv').config();
 
@@ -69,4 +70,8 @@ exports.load = async () => {
   const result = await fetch(message.attachments[0].url, {method:'GET'});
   
   return eval(await result.text())[0];
+};
+
+exports.command = async () => {
+  return require('./commands');
 };

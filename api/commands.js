@@ -85,8 +85,39 @@ exports.eval = [
   }
 ];
 
+exports.modal = [
+  {
+    name: 'modal',
+    description: 'create modal'
+  }, async (message, response) => {
+    response.status(200).send({
+      type: 9,
+      data: {
+        custom_id: 'testModal',
+        title: 'test modal',
+        components: [
+          {
+            type: 1,
+            components: [
+              {
+                "type": 2,
+                "label": "Click me!",
+                "style": 1,
+                "custom_id": "click_one"
+              }
+            ]
+          }
+        ]
+      }
+    })
+  }
+];
+
 exports.decument = [
-  {}, async (message, response) => {
+  {
+    name: 'document',
+    description: 'show document'
+  }, async (message, response) => {
     
   }
 ]

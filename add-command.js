@@ -4,6 +4,6 @@ require('dotenv').config();
 
 // cmdManager.get().then(console.log);
 
-// cmdManager.load().then(data => {
-//   cmdManager.set(Object.values(data).map(d=>d[0])).then(console.log);
-// });
+cmdManager.command().then(data => {
+  cmdManager.set(Object.values(data).map(d=>d[0])).then(console.log);
+});
