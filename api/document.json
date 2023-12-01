@@ -1,0 +1,90 @@
+[
+  { "url": "https://learn.microsoft.com/ja-jp/minecraft/creator/scriptapi/minecraft/" },
+  {
+    "name": "BeforeChatEvent",
+    "url": "server/beforechatevent",
+    "description": "プレイヤーがチャットメッセージを入力したときに発生するイベント",
+    "property": [
+      {
+        "name": "cancel",
+        "description": "trueに設定された場合、このメッセージは送信されません。",
+        "type": "Boolean",
+        "examples": [ "<BeforeChatEvent>.cancel = true;" ]
+      },
+      {
+        "name": "message",
+        "description": "送信されたメッセージ。プレイヤーにメッセージが表示される前に、メッセージを編集して更新することができます。",
+        "type": "String",
+        "examples": [ "if(<BeforeChatEvent>.message === 'test') {}", "<BeforeChatEvent>.message = 'replace';" ]
+      },
+      {
+        "name": "sender",
+        "url": "server/player",
+        "description": "メッセージを送信したプレイヤー",
+        "type": "Player",
+        "examples": [ "const senderName = <BeforeChatEvent>.sender.name;" ]
+      },
+      {
+        "name": "sendToTargets",
+        "description": "trueにすることで、メッセージを1人または複数のプレーヤーに直接送信することができる。",
+        "type": "Boolean",
+        "examples": [ "<BeforeChatEvent>.sendToTargets = true;" ]
+      },
+      {
+        "name": "targets",
+        "url": "server/player",
+        "description": "このメッセージを受信するプレイヤーのリスト。sendToTargetsをtrueにして使用する。",
+        "type": "Player[]",
+        "examples": [ "<BeforeChatEvent>.targets = [ Player1, Player2 ];" ]
+      }
+    ],
+    "examples": [
+      "<World>.events.BeforeChat.subscribe(callback: (arg: BeforeChatEvent) => void );//ハンドラ追加",
+      "<World>.events.BeforeChat.unsubscribe(callback: (arg: BeforeChatEvent) => void );//ハンドラ削除"
+    ]
+  },
+  {
+    "name": "BeforeDataDrivenEntityTriggerEvent",
+    "url": "server/beforedatadrivenentitytriggerevent",
+    "description": "エンティティイベント(minecraft:entity_spawned等)が発火した際に発生するイベント",
+    "property": [
+      {
+        "name": "cancel",
+        "description": "trueに設定された場合、このイベントは実行されません。",
+        "type": "Boolean",
+        "examples": [ "<BeforeDataDrivenEntityTriggerEvent>.cancel = true;" ]
+      },
+      {
+        "name": "entity",
+        "url": "server/entity",
+        "description": "イベントが発火したエンティティ",
+        "type": "Entity",
+        "examples": [ "const eventEntity = <BeforeDataDrivenEntityTriggerEvent>.entity;" ]
+      },
+      {
+        "name": "id",
+        "description": "発火したイベントの名前",
+        "type": "String",
+        "examples": [ "if(<BeforeDataDrivenEntityTriggerEvent>.id === 'minecraft:entity_spawned') {}" ]
+      },
+      {
+        "name": "modifiers",
+        "url": "server/definitionmodifier",
+        "description": "この発火したイベントで変更されるデータのリスト(component_groups, trigger)",
+        "type": "DefinitionModifier[]",
+        "examples": [
+          "const addGroups = <BeforeDataDrivenEntityTriggerEvent>.modifiers.map(mod => mod.componentGroupsToAdd);",
+          [
+            "const modifier = new DefinitionModifier();",
+            "modifier.componentGroupsToRemove = [ 'groupName1', 'groupName2' ];",
+            "<BeforeDataDrivenEntityTriggerEvent>.modifiers[0] = modifier"
+          ]
+        ]
+      }
+    ],
+    "examples": [
+      "<World>.events.BeforeDataDrivenEntityTrigger.subscribe(callback: (arg: BeforeDataDrivenEntityTriggerEvent) => void );//ハンドラ追加",
+      "<World>.events.BeforeDataDrivenEntityTrigger.unsubscribe(callback: (arg: BeforeDataDrivenEntityTriggerEvent) => void );//ハンドラ削除"
+    ]
+  }
+]
