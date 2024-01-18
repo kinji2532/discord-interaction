@@ -13,7 +13,10 @@ module.exports = async (request, response) => {
 
     const isValidRequest = verifyKey(rawBody, signature, timestamp, process.env.PUBLIC_KEY);
 
-    if (!isValidRequest) return response.status(401).send({ error: "Bad request signature " });
+    if (!isValidRequest) {
+      console.log('Bad request signature', rawBody, signature, timestamp, process.env.PUBLIC_KEY);
+      return response.status(401).send({ error: "Bad request signature" });
+    }
 
     const message = request.body;
 
