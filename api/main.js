@@ -7,9 +7,11 @@ const cmdList = require('./commands');
 
 module.exports = async (request, response) => {
   if (request.method === "POST") {
+    console.log(request);
     const signature = request.headers["x-signature-ed25519"];
     const timestamp = request.headers["x-signature-timestamp"];
     const rawBody = await getRawBody(request);
+    console.log(signature, timestamp, rawBody);
 
     const isValidRequest = verifyKey(rawBody, signature, timestamp, process.env.PUBLIC_KEY);
 
